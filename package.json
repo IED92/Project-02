@@ -1,0 +1,33 @@
+{
+  "name": "project-02",
+  "version": "1.0.0",
+  "description": "Project-02",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.5.0",
+    "@typescript-eslint/parser": "^2.5.0",
+    "browser-sync": "^2.26.7",
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "gulp": "^4.0.2",
+    "gulp-rename": "^1.4.0",
+    "gulp-terser": "^1.2.0"
+  },
+  "extends": "eslint:recommended",
+  "rules": {},
+  "globals": {},
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "dependencies": {
+    "gulp-eslint": "^6.0.0"
+  }
+}
