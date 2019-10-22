@@ -1,42 +1,42 @@
-const gulp = require("gulp"),
-    terser = require("gulp-terser"),
-    rename = require("gulp-rename"),
-    browserSync = require("browser-sync").create(),
-    eslint = require("gulp-eslint");
-gulp.task("lint", function () {
-    return gulp
-        .src("./js/*.js")
-        .pipe(eslint())
-        .pipe(eslint.format())
-        .pipe(eslint.failAfterError())
-});
-gulp.task("scripts", gulp.series("lint",
-    function scripts() {
-        return gulp
-            .src("./js/*.js")
-            .pipe(terser())
-            .pipe(rename({
-                extname: ".min.js"
-            }))
-            .pipe(gulp.dest("./build/js"))
-            .src("./css/*.css")
-            .pipe(terser())
-            .pipe(rename({
-                extname: ".min.css"
-            }))
-            .pipe(gulp.dest("./build/css"))
-    }));
+const gulp = require('gulp');
+const terser = require('gulp-terser');
+const rename = require('gulp-rename');
+const browserSync = require('browser-sync').create();
+const eslint = require('gulp-eslint');
+// Lint
+gulp.task('lint', () => gulp
+    .src('./js/*.js')
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError()));
+// JS format and minify
+gulp.task('scripts', gulp.series('lint',
+    () => gulp
+    .src('./js/*.js')
+    .pipe(terser())
+    .pipe(rename({
+        extname: '.min.js',
+    }))
+    .pipe(gulp.dest('./build/js'))));
+// CSS minify
+gulp.task('styles', () => gulp
+    .src('./css/*.css')
+    .pipe(terser())
+    .pipe(rename({
+        extname: '.min.css',
+    }))
+    .pipe(gulp.dest('./build/css')));
 // Static server
-gulp.task('browser-sync', function () {
+gulp.task('browser-sync', () => {
     browserSync.init({
         server: {
-            baseDir: "./"
-        }
+            baseDir: './',
+        },
     });
-    gulp.watch([".html", "build/js/.js", "css/*.css"])
-        .on("change", browserSync.reload);
+    gulp.watch(['.html', 'build/js/.js', 'build/css/.css'])
+        .on('change', browserSync.reload);
 });
-gulp.task("watch", function () {
-    gulp.watch("js/*.js", gulp.series("scripts"));
+gulp.task('watch', () => {
+    gulp.watch(['js/*.js', 'css/*.css'], gulp.parallel('scripts', 'styles'));
 });
-gulp.task("default", gulp.parallel("browser-sync", "watch"));
+gulp.task('default', gulp.parallel('browser-sync', 'watch'));

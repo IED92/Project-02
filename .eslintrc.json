@@ -10,14 +10,13 @@
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
     },
-    "parser": "@typescript-eslint/parser",
+    "parser": "esprima",
     "parserOptions": {
-        "ecmaVersion": 2018,
+        "ecmaVersion": 6,
         "sourceType": "module"
     },
-    "plugins": [
-        "@typescript-eslint"
-    ],
+    "plugins": [],
     "rules": {
+        "semi": "error"
     }
 }
