@@ -1,42 +1,45 @@
+// Variables
 const gulp = require('gulp');
 const terser = require('gulp-terser');
 const rename = require('gulp-rename');
 const browserSync = require('browser-sync').create();
 const eslint = require('gulp-eslint');
+const cleanCss = require('gulp-clean-css');
 // Lint
 gulp.task('lint', () => gulp
-    .src('./js/*.js')
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError()));
+  .src('./js/*.js')
+  .pipe(eslint())
+  .pipe(eslint.format())
+  .pipe(eslint.failAfterError()));
 // JS format and minify
-gulp.task('scripts', gulp.series('lint',
-    () => gulp
+gulp.task('mini-scripts', gulp.series('lint',
+  () => gulp
     .src('./js/*.js')
     .pipe(terser())
     .pipe(rename({
-        extname: '.min.js',
+      extname: '.min.js',
     }))
     .pipe(gulp.dest('./build/js'))));
 // CSS minify
-gulp.task('styles', () => gulp
-    .src('./css/*.css')
-    .pipe(terser())
-    .pipe(rename({
-        extname: '.min.css',
-    }))
-    .pipe(gulp.dest('./build/css')));
+gulp.task('mini-styles', () => gulp
+  .src('./css/*.css')
+  .pipe(cleanCss())
+  .pipe(rename({
+    extname: '.min.css',
+  }))
+  .pipe(gulp.dest('./build/css')));
 // Static server
 gulp.task('browser-sync', () => {
-    browserSync.init({
-        server: {
-            baseDir: './',
-        },
-    });
-    gulp.watch(['.html', 'build/js/.js', 'build/css/.css'])
-        .on('change', browserSync.reload);
+  browserSync.init({
+    server: {
+      baseDir: './',
+    },
+  });
+  gulp.watch(['.html', 'build/js/.js', 'build/css/.css'])
+    if
+    .on('change', browserSync.reload);
 });
 gulp.task('watch', () => {
-    gulp.watch(['js/*.js', 'css/*.css'], gulp.parallel('scripts', 'styles'));
+  gulp.watch(['js/*.js', 'css/*.css'], gulp.parallel(['mini-scripts', 'mini-styles']));
 });
 gulp.task('default', gulp.parallel('browser-sync', 'watch'));
