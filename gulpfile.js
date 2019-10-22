@@ -18,7 +18,13 @@ gulp.task("scripts", gulp.series("lint",
             .pipe(rename({
                 extname: ".min.js"
             }))
-            .pipe(gulp.dest("./build/js"));
+            .pipe(gulp.dest("./build/js"))
+            .src("./css/*.css")
+            .pipe(terser())
+            .pipe(rename({
+                extname: ".min.css"
+            }))
+            .pipe(gulp.dest("./build/css"))
     }));
 // Static server
 gulp.task('browser-sync', function () {
