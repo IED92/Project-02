@@ -36,7 +36,6 @@ gulp.task('browser-sync', () => {
     },
   });
   gulp.watch(['.html', 'build/js/.js', 'build/css/.css'])
-    if
     .on('change', browserSync.reload);
 });
 gulp.task('watch', () => {
