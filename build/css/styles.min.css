@@ -1,1 +1,1 @@
-html{box-sizing:border-box}*,:after,:before{box-sizing:inherit}body,html{font-size:16px}
+html{box-sizing:border-box}*,:after,:before{box-sizing:inherit}*,body,html{font-family:'Open Sans',sans-serif}body{background-color:#000;color:#fff;height:100vh}.ajax-loader,.screen-reader{display:none}
