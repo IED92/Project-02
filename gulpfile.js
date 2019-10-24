@@ -30,9 +30,10 @@ gulp.task('mini-styles', () => gulp
   .pipe(gulp.dest('./build/css')));
 // Static server
 gulp.task('browser-sync', () => {
-  browserSync.init({
+  browserSync.instance = browserSync.init({
     server: {
-      baseDir: './',
+      proxy:localhost:port
+      // baseDir: './',
     },
   });
   gulp.watch(['.html', 'build/js/.js', 'build/css/.css'])
