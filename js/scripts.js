@@ -1,5 +1,8 @@
-function hah() {
-    return true;
-}
+$(document).ready(function () {
+  alertTest();
+});
 
-hah();
+function alertTest() {
+  alert('hello');
+  return;
+};
