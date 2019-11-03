@@ -181,9 +181,18 @@ button:hover {
     }
 }
 
-.story-grid {
+.story-grid { 
+    display: flex;
+    flex-wrap: wrap;
     margin: 0 auto;
     width: 100%
+}
+
+.grid-item {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+    width: 33%;
 }
 
 .ajax-loader {
@@ -207,6 +216,7 @@ button:hover {
     justify-content: space-around;
     margin-bottom: 2rem
 }
+
 .stories li {
     flex: 0 1 100%;
     max-width: 100%
@@ -224,7 +234,7 @@ button:hover {
     }
 }
 
-@media (min-width::1000px) {
+@media (min-width:1000px) {
     .stories li {
         flex: 0 1 25%;
         max-width: 25%
