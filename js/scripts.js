@@ -22,21 +22,21 @@ async function fetchStories() {
 $('.ajax-loader').hide();
   
   let science = stories.results.filter(function (story) {
-    console.log('we\'re in filter');
+    // console.log('we\'re in filter');
     if(story.multimedia.length <= 0) {
       return;
     }
 
     const image = story.multimedia.filter(image => image.format === "Normal");
-    console.log(image[0].url);
+    // console.log(image[0].url);
 
     if (!image) return;
     
     const title = story.title;
 
     const html = `<div class="grid-item">
-      <h1>'${title}'</h1>
       <img src='${image[0].url}'/>
+      <h1>'${title}'</h1>
     </div>`;
 
     $('.story-grid').append(html);

@@ -167,6 +167,9 @@ button:hover {
   margin-bottom: 2rem;
   width: 33%; }
 
+.grid-item h1 {
+  position: absolute; }
+
 .ajax-loader {
   height: 40px;
   position: absolute;

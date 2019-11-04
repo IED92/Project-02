@@ -10,19 +10,19 @@ const gulp = require("gulp"),
   prettyError = require('gulp-prettyerror');
 
 // Sass
-gulp.task('sass', function () {
-  return gulp
-    .src('./css/styles.scss')
-    .pipe(prettyError())
-    .pipe(sass())
-    .pipe(
-      autoprefixer(),
-    )
-    .pipe(gulp.dest('./build/css'))
-    .pipe(cssnano())
-    .pipe(rename('style.min.css'))
-    .pipe(gulp.dest('./build/css'));
-});
+// gulp.task('sass', function () {
+//   return gulp
+//     .src('./css/styles.scss')
+//     // .pipe(prettyError())
+//     // .pipe(sass())
+//     // .pipe(
+//     //   autoprefixer(),
+//     // )
+//     .pipe(gulp.dest('./build/css'))
+//     .pipe(cssnano())
+//     .pipe(rename('style.min.css'))
+//     .pipe(gulp.dest('./build/css'));
+// });
 
 // Lint
 gulp.task("lint", function () {
@@ -48,12 +48,6 @@ gulp.task("scripts",
   )
 );
 
-
-gulp.task("say_hello", function (done) {
-  console.log("Hello!");
-  done();
-});
-
 /**
  * Browser Sync
  */
@@ -70,7 +64,7 @@ gulp.task('browser-sync', function () {
 
 gulp.task("watch", function () {
   gulp.watch("./js/*.js", gulp.series("scripts"));
-  gulp.watch("./css/*.scss", gulp.series("sass"));
+  // gulp.watch("./css/*.scss", gulp.series("sass"));
 });
 
 gulp.task("default", gulp.parallel("browser-sync", "watch"));

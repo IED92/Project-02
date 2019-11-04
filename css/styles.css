@@ -138,10 +138,10 @@ button:hover {
     }
 }
 
-.screen-reader,
+/* .screen-reader,
 .ajax-loader {
     display: none
-}
+} */
 
 .search-form input {
     background-color: transparent;
@@ -193,6 +193,10 @@ button:hover {
     justify-content: space-around;
     margin-bottom: 2rem;
     width: 33%;
+}
+
+.grid-item h1 {
+    position: absolute;
 }
 
 .ajax-loader {
