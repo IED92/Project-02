@@ -1,7 +1,7 @@
-async function fetchStories() {
+async function fetchStories(section) {
     try {
         // fetch the data
-        const data = await fetch('https://api.nytimes.com/svc/topstories/v2/science.json?api-key=cuqn1CNAXPPInZkmed1SYAtOGFewjKgB');
+        const data = await fetch('https://api.nytimes.com/svc/topstories/v2/`${section}`.json?api-key=cuqn1CNAXPPInZkmed1SYAtOGFewjKgB');
         // parse the body
         const json = await data.json();
         // return the data
@@ -11,34 +11,44 @@ async function fetchStories() {
     }
 }
 
+(function(){
+    $('.sections').change(async function() {
+        let section = $(this).val();
+        console.log(section);
+        let stories = await fetchStories(data);
+        console.log(data);
+        if (!stories) {
+          return;
+        }
 
-(async function() {
-    let stories = await fetchStories();
+        $('.ajax-loader').hide();
 
-    console.log(stories);
-
-    if (!stories) {
-        return;
-    }
-
-    $('.ajax-loader').hide();
-
-    let science = stories.results.filter(function(story) {
+        let science = stories.results.filter(function(story) {
+          
         if (story.multimedia.length <= 0) {
             return;
         }
 
-        const image = story.multimedia.filter(image => image.format === "superJumbo");
+        const image = story.multimedia.filter(
+            image => image.format === "superJumbo"
+            );
 
         if (!image) return;
+        return story;
+    });
 
+    science.length = 12;
+
+    science.forEach(story => {
         const content = story.abstract;
 
-        const html = `<div class="grid-item">
-      <img src='${image[0].url}'/>
-      <p>${content}</p>
-    </div>`;
+        const image = story.multimedia[4];
+
+        const html =`<div class="grid-item">
+        <img src='${image.url}'/>
+        <p>${content}</p>
+        </div>`;
 
         $('.story-grid').append(html);
     });
-})();
+    });});

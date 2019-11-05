@@ -186,7 +186,7 @@ button:hover {
 .story-grid { 
     display: flex;
     flex-wrap: wrap;
-    margin: 0 auto;
+    margin: 0 0 3rem 0;
     width: 100%
 }
 
