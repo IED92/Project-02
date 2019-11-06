@@ -1,7 +1,9 @@
+$('.ajax-loader').hide();
+
 async function fetchStories(section) {
     try {
         // fetch the data
-        const data = await fetch('https://api.nytimes.com/svc/topstories/v2/`${section}`.json?api-key=cuqn1CNAXPPInZkmed1SYAtOGFewjKgB');
+        const data = await fetch(`https://api.nytimes.com/svc/topstories/v2/${section}.json?api-key=cuqn1CNAXPPInZkmed1SYAtOGFewjKgB`);
         // parse the body
         const json = await data.json();
         // return the data
@@ -12,10 +14,12 @@ async function fetchStories(section) {
 }
 
 (function(){
-    $('.sections').change(async function() {
+    $('#sections').change(async function() {
+        $('.story-grid').empty();
+        $('.ajax-loader').show();
         let section = $(this).val();
         console.log(section);
-        let stories = await fetchStories(data);
+        let stories = await fetchStories(section);
         console.log(data);
         if (!stories) {
           return;
