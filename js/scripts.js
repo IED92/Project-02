@@ -19,7 +19,7 @@ async function fetchStories(section) {
         $('.ajax-loader').show();
         let section = $(this).val();
         console.log(section);
-        let stories = await fetchStories(section);
+        let stories = await fetchStories(section).catch(error => console.error(error));
         console.log(data);
         if (!stories) {
           return;
