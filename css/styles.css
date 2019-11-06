@@ -199,6 +199,13 @@ button:hover {
     height: 70vh;
 }
 
+@media (min-width:600px) {
+    .grid-item {
+        width: 33%;
+        height: 30vh;
+    }
+}
+
 @media (min-width: 1000px) {
     .grid-item {
         width: 25%;

@@ -18,32 +18,28 @@ async function fetchStories(section) {
         $('.story-grid').empty();
         $('.ajax-loader').show();
         let section = $(this).val();
-        console.log(section);
         let stories = await fetchStories(section).catch(error => console.error(error));
-        console.log(data);
+        
         if (!stories) {
           return;
         }
 
         $('.ajax-loader').hide();
 
-        let science = stories.results.filter(function(story) {
+        let article = stories.results.filter(function(story) {
           
         if (story.multimedia.length <= 0) {
             return;
         }
 
-        const image = story.multimedia.filter(
-            image => image.format === "superJumbo"
-            );
-
-        if (!image) return;
-        return story;
+        const image = story.multimedia.filter(image => image.format === "superJumbo");
+        return image && story;
     });
 
-    science.length = 12;
 
-    science.forEach(story => {
+    article.forEach((story, index) => {
+        if (index >= 12) return false;
+        
         const content = story.abstract;
 
         const image = story.multimedia[4];
@@ -55,4 +51,5 @@ async function fetchStories(section) {
 
         $('.story-grid').append(html);
     });
-    });});
+    });
+})();
