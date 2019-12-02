@@ -9,20 +9,20 @@ const gulp = require("gulp"),
   cssnano = require('gulp-cssnano'),
   prettyError = require('gulp-prettyerror');
 
-// Sass
-// gulp.task('sass', function () {
-//   return gulp
-//     .src('./css/styles.scss')
-//     // .pipe(prettyError())
-//     // .pipe(sass())
-//     // .pipe(
-//     //   autoprefixer(),
-//     // )
-//     .pipe(gulp.dest('./build/css'))
-//     .pipe(cssnano())
-//     .pipe(rename('style.min.css'))
-//     .pipe(gulp.dest('./build/css'));
-// });
+Sass
+gulp.task('sass', function () {
+  return gulp
+    .src('./css/styles.scss')
+    .pipe(prettyError())
+    .pipe(sass())
+    .pipe(
+      autoprefixer(),
+    )
+    .pipe(gulp.dest('./build/css'))
+    .pipe(cssnano())
+    .pipe(rename('style.min.css'))
+    .pipe(gulp.dest('./build/css'));
+});
 
 // Lint
 gulp.task("lint", function () {
