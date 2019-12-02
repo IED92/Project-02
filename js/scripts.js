@@ -1,7 +1,9 @@
+$('.ajax-loader').hide();
+
 async function fetchStories(section) {
     try {
         // fetch the data
-        const data = await fetch('https://api.nytimes.com/svc/topstories/v2/`${section}`.json?api-key=cuqn1CNAXPPInZkmed1SYAtOGFewjKgB');
+        const data = await fetch(`https://api.nytimes.com/svc/topstories/v2/${section}.json?api-key=cuqn1CNAXPPInZkmed1SYAtOGFewjKgB`);
         // parse the body
         const json = await data.json();
         // return the data
@@ -12,34 +14,32 @@ async function fetchStories(section) {
 }
 
 (function(){
-    $('.sections').change(async function() {
+    $('#sections').change(async function() {
+        $('.story-grid').empty();
+        $('.ajax-loader').show();
         let section = $(this).val();
-        console.log(section);
-        let stories = await fetchStories(data);
-        console.log(data);
+        let stories = await fetchStories(section).catch(error => console.error(error));
+        
         if (!stories) {
           return;
         }
 
         $('.ajax-loader').hide();
 
-        let science = stories.results.filter(function(story) {
+        let article = stories.results.filter(function(story) {
           
         if (story.multimedia.length <= 0) {
             return;
         }
 
-        const image = story.multimedia.filter(
-            image => image.format === "superJumbo"
-            );
-
-        if (!image) return;
-        return story;
+        const image = story.multimedia.filter(image => image.format === "superJumbo");
+        return image && story;
     });
 
-    science.length = 12;
 
-    science.forEach(story => {
+    article.forEach((story, index) => {
+        if (index >= 12) return false;
+        
         const content = story.abstract;
 
         const image = story.multimedia[4];
@@ -51,4 +51,5 @@ async function fetchStories(section) {
 
         $('.story-grid').append(html);
     });
-    });});
+    });
+})();
